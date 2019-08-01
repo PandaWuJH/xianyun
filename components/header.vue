@@ -12,18 +12,18 @@
           <nuxt-link to="/air">国内机票</nuxt-link>
         </div>
         <div class="login">
-          <div v-if="true">
+          <div v-if="!$store.state.user.userInfo.token">
             <nuxt-link to="/user/login">登录/注册</nuxt-link>
           </div>
           <!-- 个人信息盒子，登录后显示 -->
           <el-dropdown v-else>
             <div class="menus">
               <img src="http://157.122.54.189:9095/assets/images/avatar.jpg" alt />
-              <span>银河抽水机</span>
+              <span>{{$store.state.user.userInfo.user.nickname}}</span>
               <i class="el-icon-arrow-down el-icon--right"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人中心</el-dropdown-item>
-                <el-dropdown-item>退出</el-dropdown-item>
+                <el-dropdown-item @click.native='clearUser()'>退出</el-dropdown-item>
               </el-dropdown-menu>
             </div>
           </el-dropdown>
@@ -32,6 +32,17 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods:{
+    clearUser(){
+    this.$store.commit('user/clearUser')
+  }
+  }
+  
+}
+</script>
 
 <style lang='less' scoped>
 ul li ol {
