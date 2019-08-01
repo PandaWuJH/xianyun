@@ -17,7 +17,7 @@
         </span>
         </el-tab-pane>
         <!-- 输入搜索框 -->
-        <div style="margin-top: 2px;">
+        <div>
           <el-input :placeholder="search[current].placeholder" v-model="searchWord" class="input-with-select">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
@@ -63,6 +63,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$store.state.user.userInfo.user.nickname)
+    console.log(this.$store)
     console.log(this.$axios.defaults.baseURL);
     this.$axios({
       url: "/scenics/banners"
@@ -75,6 +77,7 @@ export default {
         console.log(err);
       });
   }
+
 };
 </script>
 
@@ -95,10 +98,10 @@ export default {
 }
 /deep/ .el-tabs{
   z-index:9;
-  width: 550px;
+  width: 318px;
   float: left;
   margin-top: -400px;
-  margin-left: 400px;
+  margin-left: 514px;
   margin-bottom:-2px;
   background: rgba(0,0,0,.5);
 }
@@ -115,7 +118,7 @@ export default {
 /deep/ .el-tabs__header{
     background: rgba(0,0,0,.5);
   width: 318px;
-  border-radius:5px 
+  // border-radius:5px 
 }
 /deep/ .el-tabs__content{
   z-index: 9;

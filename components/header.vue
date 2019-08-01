@@ -12,14 +12,15 @@
           <nuxt-link to="/air">国内机票</nuxt-link>
         </div>
         <div class="login">
-          <img src alt />
-          <el-dropdown>
+          <div v-if="true">
+            <nuxt-link to="/user/login">登录/注册</nuxt-link>
+          </div>
+          <!-- 个人信息盒子，登录后显示 -->
+          <el-dropdown v-else>
             <div class="menus">
               <img src="http://157.122.54.189:9095/assets/images/avatar.jpg" alt />
-              <el-button>
-                登录/注册
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
+              <span>银河抽水机</span>
+              <i class="el-icon-arrow-down el-icon--right"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人中心</el-dropdown-item>
                 <el-dropdown-item>退出</el-dropdown-item>
@@ -33,9 +34,6 @@
 </template>
 
 <style lang='less' scoped>
-.view {
-
-}
 ul li ol {
   list-style: none;
 }
@@ -48,8 +46,8 @@ a {
 }
 .header {
   box-sizing: border-box;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 1px 3px #eee;
+  // border-bottom: 1px solid #ccc;
+  // box-shadow: 0 1px 3px #eee;
   font-size: 18px;
   height: 60px;
   width: 1000px;
@@ -64,7 +62,6 @@ a {
     }
   }
   .login {
-    margin-top:-2px;
     img {
       border-radius: 50%;
       width: 36px;
@@ -74,6 +71,9 @@ a {
       &:hover {
         border: 3px solid #409eff;
       }
+    }
+    a {
+      font-size: 16px;
     }
   }
   .nav {
@@ -91,13 +91,13 @@ a {
         border-bottom: 5px solid #409eff;
       }
     }
-  }
-}
-.nuxt-link-exact-active {
-  background: #409eff;
-  color: #fff;
-  &:hover {
-    color: #fff;
+    .nuxt-link-exact-active {
+      background: #409eff;
+      color: #fff;
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 }
 </style>
