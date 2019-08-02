@@ -63,9 +63,8 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.$store.state.user.userInfo.user.nickname)
-    // console.log(this.$store)
-    // console.log(this.$axios.defaults.baseURL);
+    console.log(this.$store.state.user.userInfo.user.nickname)
+    console.dir(this.$axios)
     this.$axios({
       url: "/scenics/banners"
     })

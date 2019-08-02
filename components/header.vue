@@ -13,7 +13,7 @@
         </div>
         <div class="login">
           <div v-if="!$store.state.user.userInfo.token">
-            <nuxt-link to="/user/login">登录/注册</nuxt-link>
+            <nuxt-link to="/user/login"><i class="el-icon-s-custom"></i>登录/注册</nuxt-link>
           </div>
           <!-- 个人信息盒子，登录后显示 -->
           <el-dropdown v-else>
@@ -59,7 +59,7 @@ a {
   box-sizing: border-box;
   // border-bottom: 1px solid #ccc;
   // box-shadow: 0 1px 3px #eee;
-  font-size: 18px;
+  font-size: 16px;
   height: 60px;
   width: 1000px;
   margin: 0 auto;
@@ -84,7 +84,11 @@ a {
       }
     }
     a {
-      font-size: 16px;
+      font-size: 14px;
+      i{
+        font-size: 20px;
+        color:#666;
+      }
     }
   }
   .nav {

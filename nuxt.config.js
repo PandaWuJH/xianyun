@@ -30,9 +30,11 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
+//  plugins文件下的js文件需要通过该对象配置，所有插件在页面生成前都会调用
   plugins: [
-    '@/plugins/element-ui',
-    { src: '~/plugins/localStorage.js', ssr: false }
+    '@/plugins/element-ui',//配置element-ui，创建项目自动生成
+    '@/plugins/axios',//调用axios插件
+    { src: '~/plugins/localStorage.js', ssr: false }//调用本地存储的插件，ssr: false ，使得插件只会在客户端运行。
   ],
   /*
   ** Nuxt.js dev-modules
