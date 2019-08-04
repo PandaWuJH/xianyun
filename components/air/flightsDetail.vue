@@ -10,7 +10,7 @@
             <span>{{data.org_airport_name}}</span>
           </el-col>
           <el-col :span="8" class="time">
-            <span>经过时间</span>
+            <span>{{dealTime}}</span>
           </el-col>
           <el-col :span="8" class="endFly">
             <strong>{{data.arr_time}}</strong>
@@ -29,7 +29,13 @@
         <span>低价推荐</span>
       </el-col>
       <el-col :span="20">
-        <el-row type="flex" align="middle" style="padding:10px 0;" v-for='(item,index) in data.seat_infos' :key='index'>
+        <el-row
+          type="flex"
+          align="middle"
+          style="padding:10px 0;"
+          v-for="(item,index) in data.seat_infos"
+          :key="index"
+        >
           <el-col :span="16">
             <i style="color:#409eff">{{item.group_name}}</i>
             <span>| {{item.supplierName}}</span>
@@ -50,14 +56,40 @@
 <script>
 export default {
   props: {
+    //   props除了['']写法，还可以这样写：
+    // type:数据类型
+    // default:不传值时的默认值
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
   },
-  data(){
-      return{
-          isshow:false
+  data() {
+    return {
+      isshow: false,
+      spendHous: "",
+      spendMinute: ""
+    };
+  },
+  //   计算属性：处理飞行时间
+  computed: {
+    dealTime() {
+      //   计算到达时间：按分钟算
+      // 10:10=>610  07:55=>475  610-475=135 => 2:15
+      var arr1 = this.data.arr_time.split(":");
+      var arr2 = this.data.dep_time.split(":");
+      if(arr1[0]<arr2[0]){
+          arr1[0]+=24
       }
+      var arrTime = +arr1[0] * 60 + +arr1[1];
+      //   计算出发时间：按分钟算   
+      var depTime = +arr2[0] * 60 + +arr2[1];
+    //   相减除以60以及取余数
+      var spendTime = arrTime - depTime; //135
+      var resultHour = Math.floor(spendTime / 60); //2
+      var resultMinute = spendTime % 60; //15
+     return resultHour+'时'+resultMinute+"分"  //2时15分
+    }
   }
 };
 </script>
