@@ -14,7 +14,20 @@
           </el-col>
           <el-col :span="5">价格</el-col>
         </el-row>
-        <FlightsDetail/>
+        <FlightsDetail
+        v-for='(item,index) in airsList' :key='index'
+        :data='item'
+        />
+       <!-- 分页 -->
+        <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageNum"
+      :page-sizes="[2, 4, 6, 8]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination> 
       </div>
       
       <div class="right"></div>
@@ -28,6 +41,25 @@ export default {
   components: {
     FlightsDetail
   },
+  data(){
+      return{
+          airsList:[], 
+          total:0,
+        pageNum:1,
+        pageSize:2,
+      }
+     
+  },
+  methods:{
+    //   修改显示条数时触发事件
+    handleSizeChange(value){
+        console.log(value);
+    },
+    // 修改当前页码时触发事件
+    handleCurrentChange(value){
+        console.log(value);
+    }
+  },
   // 获取机票列表
   mounted() {
     // 路由普通参数获取
@@ -37,7 +69,10 @@ export default {
     this.$axios({
       url: "airs",
       params: this.$route.query
-    });
+    }).then(res=>{
+        console.log(res);
+        this.airsList=res.data.flights
+    })
   }
 };
 </script>
@@ -74,4 +109,9 @@ export default {
     width: 280px;
   }
 }
+ 
+/deep/ .el-pagination{
+        padding-left: 137px;
+    }
+
 </style>
