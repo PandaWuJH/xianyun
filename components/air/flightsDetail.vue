@@ -90,6 +90,9 @@ export default {
       var resultMinute = spendTime % 60; //15
      return resultHour+'时'+resultMinute+"分"  //2时15分
     }
+  },
+  mounted(){
+    console.log(this.data);
   }
 };
 </script>

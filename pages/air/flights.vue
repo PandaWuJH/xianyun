@@ -2,8 +2,8 @@
   <div class="container">
     <el-row type="flex" justify="space-between">
       <div class="left">
-        <el-row class="dancheng">单程： 广州 - 北京 / 2019-08-04</el-row>
-        <el-row class="shaixuan">筛选：撤销</el-row>
+        <!-- 头部筛选组件 传值与传事件-->
+        <FlightsHead :data='res'  @getDataList="getDataList"/>
         <el-row class="flightHear">
           <el-col :span="5">航空信息</el-col>
           <el-col :span="14">
@@ -14,6 +14,7 @@
           </el-col>
           <el-col :span="5">价格</el-col>
         </el-row>
+        <!-- 航班信息组件 -->
         <FlightsDetail v-for="(item,index) in newAirsList" :key="index" :data="item" />
         <!-- 分页 -->
         <el-pagination
@@ -34,9 +35,11 @@
 
 <script>
 import FlightsDetail from "@/components/air/flightsDetail";
+import FlightsHead from "@/components/air/flightsHead";
 export default {
   components: {
-    FlightsDetail
+    FlightsDetail,
+    FlightsHead
   },
   data() {
     return {
@@ -44,7 +47,12 @@ export default {
       newAirsList: [], //分页时遍历的列表数据
       total: 110,
       pageNum: 1,
-      pageSize: 2
+      pageSize: 2,
+       //总数据，有flights,info,options数据
+         res: {
+        info: {},
+         options: {}
+       }
     };
   },
   methods: {
@@ -58,7 +66,11 @@ export default {
       this.pageNum = value;
       this.getDataList()
     },
-    getDataList() {
+    getDataList(arr) {
+      if(arr){
+        this.airsList=arr;
+        this.total=arr.length;
+      }
       this.newAirsList = this.airsList.slice(
         (this.pageNum - 1) * this.pageSize,
         (this.pageNum - 1) * this.pageSize + this.pageSize
@@ -76,8 +88,14 @@ export default {
       params: this.$route.query
     }).then(res => {
       console.log(res);
+      // 获取总数据
+      this.res=res.data;
+      // console.log(this.res);
+      // 获取分页总条数
       this.total = res.data.total;
+      // 获取总的列表数
       this.airsList = res.data.flights;
+      // 获取分页默认设置的数组
       this.newAirsList = this.airsList.slice(0, this.pageSize);
       // console.log(this.newAirsList);
       // console.log(this.airsList);
@@ -90,18 +108,7 @@ export default {
 .container {
   width: 1000px;
   margin: 0 auto;
-  .dancheng {
-    padding: 10px 0;
-    border: 1px solid #ddd;
-    margin: 10px 0;
-    font-size: 14px;
-  }
-  .shaixuan {
-    padding: 10px 0;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
+
   .left {
     width: 745px;
     .flightHear {
