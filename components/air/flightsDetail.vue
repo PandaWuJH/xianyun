@@ -44,7 +44,7 @@
             <span>￥{{item.par_price}}</span>
           </el-col>
           <el-col :span="3">
-            <el-button type="warning" style="width:70px;padding:6px;display:block">选定</el-button>
+            <el-button type="warning" style="width:70px;padding:6px;display:block" @click='toBuy(data.id,item.seat_xid)'>选定</el-button>
             <span>剩余：{{item.discount}}</span>
           </el-col>
         </el-row>
@@ -89,6 +89,17 @@ export default {
       var resultHour = Math.floor(spendTime / 60); //2
       var resultMinute = spendTime % 60; //15
      return resultHour+'时'+resultMinute+"分"  //2时15分
+    }
+  },
+  methods:{
+    toBuy(id,seat_xid){
+      this.$router.push({
+        path:'/air/order',
+        query:{
+          id,
+          seat_xid
+        } 
+      })
     }
   },
   mounted(){

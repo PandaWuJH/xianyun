@@ -28,7 +28,9 @@
         ></el-pagination>
       </div>
 
-      <div class="right"></div>
+      <div class="right">
+        <FlightsAside/>
+      </div>
     </el-row>
   </div>
 </template>
@@ -36,16 +38,18 @@
 <script>
 import FlightsDetail from "@/components/air/flightsDetail";
 import FlightsHead from "@/components/air/flightsHead";
+import FlightsAside from "@/components/air/flightsAside";
 export default {
   components: {
     FlightsDetail,
-    FlightsHead
+    FlightsHead,
+    FlightsAside
   },
   data() {
     return {
       airsList: [], //所有机票列表数据
       newAirsList: [], //分页时遍历的列表数据
-      total: 110,
+      total: 8,
       pageNum: 1,
       pageSize: 2,
        //总数据，有flights,info,options数据
@@ -75,19 +79,14 @@ export default {
         (this.pageNum - 1) * this.pageSize,
         (this.pageNum - 1) * this.pageSize + this.pageSize
       );
-    }
-  },
-  // 获取机票列表
-  mounted() {
-    // 路由普通参数获取
-    // this.$route为一个对象，里面有params,query等属性
-    // console.dir(this.$route);
-    // console.dir(this.$router);
-    this.$axios({
+    },
+    // 获取列表总数据
+    getTotalList(){
+       this.$axios({
       url: "airs",
       params: this.$route.query
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       // 获取总数据
       this.res=res.data;
       // console.log(this.res);
@@ -100,6 +99,22 @@ export default {
       // console.log(this.newAirsList);
       // console.log(this.airsList);
     });
+    }
+  },
+  // 获取机票列表
+  mounted() {
+    // 路由普通参数获取
+    // this.$route为一个对象，里面有params,query等属性
+    // console.dir(this.$route);
+    // console.dir(this.$router);
+   this.getTotalList()
+  },
+  // 监听路由变化时调用函数
+  watch:{
+    $route(){
+      this.pageNum=1,
+      this.getTotalList()
+    }
   }
 };
 </script>
@@ -122,7 +137,8 @@ export default {
     }
   }
   .right {
-    width: 280px;
+    width: 240px;
+    
   }
 }
 

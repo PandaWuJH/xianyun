@@ -59,10 +59,10 @@ export default {
   },
   data() {
     return {
-        depAirPort:'',
-        company:"",
-        size:"",
-        flyTime:"",
+        depAirPort:'',//机场
+        company:"",//公司
+        size:"",//机型
+        flyTime:"",//出发时间
         airSize:[
             {label:'大',value:'L'},
             {label:'中',value:'M'},
@@ -127,7 +127,7 @@ export default {
 .dancheng {
   padding: 10px 0;
   border: 1px solid #ddd;
-  margin: 10px 0;
+  margin-bottom: 10px ;
   font-size: 14px;
 }
 .shaixuan {

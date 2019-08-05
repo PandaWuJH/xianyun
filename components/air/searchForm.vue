@@ -80,6 +80,9 @@ export default {
             var z = item.sort;
             newArr.push({ value: v, sort: z });
           });
+          if(!newArr.length){
+            return
+          }
            //    设置默认城市和城市代码为下拉菜单第一个值
           this.airForm.departCity = newArr[0].value;
           this.airForm.departCode = newArr[0].sort;
@@ -112,6 +115,9 @@ export default {
             var z = item.sort;
             newArr.push({ value: v, sort: z });
           });
+           if(!newArr.length){
+            return
+          }
           //    设置默认城市和城市代码为下拉菜单第一个值
           this.airForm.destCity = newArr[0].value;
           this.airForm.destCode = newArr[0].sort;
@@ -122,19 +128,19 @@ export default {
     },
     //   选择下拉列表的出发城市时触发的函数
     handleDepSelect(value) {
-      console.log(value);
+      // console.log(value);
       this.airForm.departCode = value.sort;
     },
     //   选择下拉列表的到达城市时触发的函数
     handleDesSelect(value) {
-      console.log(value);
+      // console.log(value);
       this.airForm.destCode = value.sort;
     },
     // 选择日期时触发的函数
     handleDate(value){
-        console.log(value);
+        // console.log(value);
         var time=moment(value).format('YYYY-MM-DD');
-        console.log(time);
+        // console.log(time);
         this.airForm.departDate=time;
     },
     // 提交表单
@@ -157,12 +163,21 @@ export default {
             })
             return
         }
-        console.log(this.airForm);
+        // console.log(this.airForm);
         this.$router.push({path:'/air/flights',query:this.airForm})
+
+        // 用vue-x保存搜索数据
+        // 扩展运算法复制数组
+        var storeArr=[...this.$store.state.air.searchArr]
+        storeArr.unshift(this.airForm)
+        if(storeArr.length>5){
+          storeArr.length=5
+        }
+        this.$store.commit('air/setSearch',storeArr)
     },
     // 点击切换城市
     changeDeal(){
-        console.log(111);
+        // console.log(111);
         const {departCity,departCode,destCity,destCode} =this.airForm;
         this.airForm.departCity=destCity;
         this.airForm.departCode=destCode;
