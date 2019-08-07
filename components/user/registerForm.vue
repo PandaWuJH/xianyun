@@ -88,13 +88,13 @@ export default {
       this.sendBtn=true;
       this.sendBtnStyle='info';
       var i=30;
-      var timer=window.setInterval(()=>{
+      var timer=setInterval(()=>{
          i--;
         console.log(this.sendButtonVlaue);
         this.sendButtonVlaue=i+'秒后重新点击';
        
         if(i===0){
-          window.clearInterval(timer);
+          clearInterval(timer);
           this.sendButtonVlaue='点击发送验证码';
           this.sendBtn=false;
           this.sendBtnStyle='danger';

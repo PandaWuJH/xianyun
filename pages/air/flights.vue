@@ -3,7 +3,7 @@
     <el-row type="flex" justify="space-between">
       <div class="left">
         <!-- 头部筛选组件 传值与传事件-->
-        <FlightsHead :data='res'  @getDataList="getDataList"/>
+        <FlightsHead :data='resStore'  @getDataList="getDataList"/>
         <el-row class="flightHear">
           <el-col :span="5">航空信息</el-col>
           <el-col :span="14">
@@ -56,7 +56,13 @@ export default {
          res: {
         info: {},
          options: {}
-       }
+       },
+       //缓存总数据，不能被修改
+         resStore: {
+        info: {},
+         options: {}
+       },
+       
     };
   },
   methods: {
@@ -89,6 +95,8 @@ export default {
       // console.log(res);
       // 获取总数据
       this.res=res.data;
+      // 备份总数据
+      this.resStore={...res.data}
       // console.log(this.res);
       // 获取分页总条数
       this.total = res.data.total;

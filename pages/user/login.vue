@@ -39,7 +39,7 @@ export default {
   width: 400px;
   height: 39px;
   position: relative;
-  left: 435px;
+  left: 475px;
   top: 100px;
 //   border: 1px solid red;
   .el-tabs__item {

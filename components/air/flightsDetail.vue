@@ -41,7 +41,7 @@
             <span>| {{item.supplierName}}</span>
           </el-col>
           <el-col :span="5" class="price">
-            <span>￥{{item.par_price}}</span>
+            <span>￥{{item.org_settle_price}}</span>
           </el-col>
           <el-col :span="3">
             <el-button type="warning" style="width:70px;padding:6px;display:block" @click='toBuy(data.id,item.seat_xid)'>选定</el-button>
