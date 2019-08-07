@@ -340,6 +340,5 @@ export default {
   width: 250px;
   height: 50px;
 }
-/deep/ .el-input-group__append {
-}
+
 </style>

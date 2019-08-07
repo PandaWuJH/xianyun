@@ -117,7 +117,7 @@ export default {
     // console.dir(this.$router);
    this.getTotalList()
   },
-  // 监听路由变化时调用函数
+  // 监听路由变化时调用函数,点击历史查询时路由变化跳转
   watch:{
     $route(){
       this.pageNum=1,
