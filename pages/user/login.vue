@@ -30,8 +30,7 @@ export default {
 
 <style lang='less' scoped>
 .container {
-  background: url(http://157.122.54.189:9095/assets/images/th03.jfif) no-repeat
-    0 0;
+  background: url(http://157.122.54.189:9095/assets/images/th03.jfif) no-repeat center center;
   height: 700px;
   width: 100%;
 }

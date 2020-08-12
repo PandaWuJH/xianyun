@@ -5,7 +5,7 @@
       <el-carousel-item v-for="(item,index) in banners" :key="index">
         <div
           class="banner"
-          :style="`background:url(${$axios.defaults.baseURL+item.url}) center center no-repeat`"
+          :style="`background:url(${item.url}) center center no-repeat`"
         ></div>
       </el-carousel-item>
     </el-carousel>
@@ -31,7 +31,17 @@
 export default {
   data() {
     return {
-      banners: [],
+      banners: [
+        {
+          url: "http://157.122.54.189:9095/assets/images/th03.jfif"
+        },
+        {
+          url: "http://157.122.54.189:9095/assets/images/th03.jfif"
+        },
+        {
+          url: "http://157.122.54.189:9095/assets/images/th03.jfif"
+        },
+    ],
       search: [
         {
           icon: "el-icon-s-flag",
@@ -65,18 +75,17 @@ export default {
   mounted() {
     console.log(this.$store.state.user.userInfo.user.nickname)
     console.dir(this.$axios)
-    this.$axios({
-      url: "/scenics/banners"
-    })
-      .then(res => {
-        console.log(res);
-        this.banners = res.data.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.$axios({
+    //   url: "/scenics/banners"
+    // })
+    //   .then(res => {
+    //     console.log(res);
+    //     this.banners = res.data.data;
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
-
 };
 </script>
 
